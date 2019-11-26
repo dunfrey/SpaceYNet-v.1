@@ -3,7 +3,7 @@
 # SpaceYNet
 > Simple project description.
 
-A Approach to Pose and Depth-Scene Regression Simultaneously.
+A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networks.
 
 ## Stakeholders
 > Describe the people involved in this project
