@@ -19,7 +19,9 @@ VALID_SPLIT = 0.25
 FOLDER_DATASET = []
 OUTPUT_RESULT = []
 CHECKPOINTER = []
+EARLIERSTOP = []
 
+images_name = []
 images_label_axis = []
 images_label_quat = []
 images_rgb = []

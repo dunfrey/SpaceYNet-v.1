@@ -5,23 +5,35 @@ import handler as hdl
 def train(**kwargs):
     """
     $ python spaceynet.py train \
-    --input_dataset_folder ../dataset/laser/ \
-    --input_file_data_train ../dataset/laser/testando.txt \
-    --input_output_folder ../output_laser/ \
-    --input_checkpoint_file '../output_laser/checkpoint/spaceynet.h5'
+    --input_dataset_folder ../../../spaceynet/dataset/laser/ \
+    --input_file_data_train ../../../spaceynet/dataset/laser/testando.txt \
+    --input_output_folder ../../../spaceynet/output_laser/ \
+    --input_checkpoint_file '../../../spaceynet/output_laser/checkpoint/spaceynet.h5'
     """
     hdl.set_configurations(**kwargs)
-    if hdl.extract_text_file(**kwargs):
+    if hdl.extract_text_file('TRAIN', **kwargs):
         print('No Image/Label Data was Found')
         sys.exit()
 
     hdl.extract_data()
-    hdl.fit()
+    hdl.fit_model(**kwargs)
 
     pass
 
 
 def test(**kwargs):
+    """
+    $ python spaceynet.py test \
+    --input_dataset_folder ../../../spaceynet/dataset/laser/ \
+    --input_file_data_train ../../../spaceynet/dataset/laser/testando.txt \
+    --input_output_folder ../../../spaceynet/output_laser/ \
+    --input_checkpoint_file '../../../spaceynet/output_laser/checkpoint/spaceynet.h5'
+    """
+    hdl.set_configurations(**kwargs)
+    if hdl.extract_text_file('TEST', **kwargs):
+        print('No Image/Label Data was Found')
+        sys.exit()
+
     pass
 
 
