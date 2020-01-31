@@ -1,9 +1,12 @@
+import sys
+
 import system_configurator
+import data_engineering
 import networks
 import utils
 
 
-def train(**kwargs):
+def train(*args, **kwargs):
     """Execute:
     $ python main.py \
     train \
@@ -16,8 +19,12 @@ def train(**kwargs):
     checkpointer = networks.set_checkpointer(kwargs['output_path'])
     lr_reducer = networks.set_reducer()
 
+    X_img, y_depth, y_axis, y_quat = \
+        data_engineering.extract_data(sys.argv[1],
+                                      kwargs['input_data_path'])
 
-def test(**kwargs):
+
+def test(*args, **kwargs):
     """Execute:
     $ python main.py \
     test \
