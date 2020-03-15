@@ -12,10 +12,11 @@ session = InteractiveSession(config=config_tf)
 
 def set_network(output_path):
     checkpoint_path = output_path + 'checkpoint/'
-    with tf.device('/device:GPU:0'):
+    with tf.device(config.DEVICE_WORK):
 
+        # Checking if model not exits. If not, then create it
         if not os.path.exists(checkpoint_path + config.CK_CHOICE):
-            model = model_patch[config.CK_CHOICE]()
+            model = charge_model_patch[config.CK_CHOICE]()
 
             networks.export_summary_model(output_path,
                                           model)
@@ -35,17 +36,7 @@ def create_spaceynet_v2():
     return networks.create_spaceynet_v2()
 
 
-def create_posenet():
-    return networks.create_posenet()
-
-
-def create_contextualnet():
-    return networks.create_contextualnet()
-
-
-model_patch = {
+charge_model_patch = {
     config.CK_SPACEYNET_V1: create_spaceynet_v1,
-    config.CK_SPACEYNET_V2: create_spaceynet_v2,
-    config.CK_POSENET: create_posenet,
-    config.CK_CONTEXTUALNET: create_contextualnet
+    config.CK_SPACEYNET_V2: create_spaceynet_v2
 }

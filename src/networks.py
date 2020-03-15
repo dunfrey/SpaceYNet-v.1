@@ -12,17 +12,16 @@ def create_spaceynet_v1():
                         config.IMG_WIDTH,
                         config.IMG_CHANNEL))
     # DEPTH
-    depth_left = layers.unet_first_path(input_data)
-    depth_right = layers.unet_second_path(depth_left)
+    depth_downsampling = layers.depth_first_step(input_data)
+    depth_upsampling = layers.depth_second_step(depth_downsampling)
 
     # POSE
-    pose_first_path = layers.googlenet_second_path(depth_left)
-    output_googlenet = \
-        layers.prepare_googlenet_output(pose_first_path)
+    pose_network = layers.pose_second_path(depth_downsampling)
+    pose_6_dof = layers.prepare_pose_output(pose_network)
 
     # NETWORK OUTPUTS
-    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(output_googlenet)
-    cls_depth = depth_right
+    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(pose_6_dof)
+    cls_depth = depth_upsampling
 
     model = network_output(input_data,
                            cls_pose_xyz,
@@ -39,78 +38,24 @@ def create_spaceynet_v2():
                                     config.IMG_CHANNEL))
 
     # DEPTH
-    depth_left = layers.unet_first_path(input_data)
-    depth_right = layers.unet_second_path(depth_left)
+    depth_left = layers.depth_first_step(input_data)
+    depth_right = layers.depth_second_step(depth_left)
 
     # POSE
-    pose_first_path = layers.googlenet_second_path(depth_left)
-    output_googlenet = \
-        layers.prepare_googlenet_output(pose_first_path)
+    pose_first_path = layers.pose_second_path(depth_left)
+    pose_6_dof = layers.prepare_pose_output(pose_first_path)
 
     # LSTM
-    output_googlenet_lstm = \
-        layers.prepare_googlenet_output_lstm(output_googlenet)
+    pose_6_dof_lstm = layers.prepare_pose_output_lstm(pose_6_dof)
 
     # NETWORK OUTPUTS
-    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(output_googlenet_lstm)
+    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(pose_6_dof_lstm)
     cls_depth = depth_right
 
     model = network_output(input_data,
                            cls_pose_xyz,
                            cls_pose_wpqr,
                            cls_depth)
-
-    return model
-
-
-def create_posenet():
-    input_data = Input((config.IMG_HEIGHT,
-                        config.IMG_WIDTH,
-                        config.IMG_CHANNEL))
-    # POSE
-    pose_first_path = layers.googlenet_first_path(input_data)
-
-    pose_second_path = layers.googlenet_second_path(pose_first_path)
-
-    output_googlenet = \
-        layers.prepare_googlenet_output(pose_second_path)
-
-    # NETWORK OUTPUTS
-    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(output_googlenet)
-
-    model = network_output(input_data,
-                           cls_pose_xyz,
-                           cls_pose_wpqr,
-                           None)
-
-    return model
-
-
-def create_contextualnet():
-    input_data = Input(batch_shape=(config.BATCH_SIZE,
-                                    config.IMG_HEIGHT,
-                                    config.IMG_WIDTH,
-                                    config.IMG_CHANNEL))
-
-    # POSE
-    pose_first_path = layers.googlenet_first_path(input_data)
-
-    pose_second_path = layers.googlenet_second_path(pose_first_path)
-
-    output_googlenet = \
-        layers.prepare_googlenet_output(pose_second_path)
-
-    # LSTM
-    output_googlenet_lstm = \
-        layers.prepare_googlenet_output_lstm(output_googlenet)
-
-    # NETWORK OUTPUTS
-    cls_pose_xyz, cls_pose_wpqr = layers.output_pose(output_googlenet_lstm)
-
-    model = network_output(input_data,
-                           cls_pose_xyz,
-                           cls_pose_wpqr,
-                           None)
 
     return model
 
@@ -157,8 +102,8 @@ def export_summary_model(path, model):
         model.summary(print_fn=lambda x: f.write(x + '\n'))
 
 
-def extract_model(path):
-    model = load_model(path)
+def extract_model(model_checkpoint_path):
+    model = load_model(model_checkpoint_path)
     return model
 
 

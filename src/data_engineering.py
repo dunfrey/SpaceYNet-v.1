@@ -6,20 +6,17 @@ import utils
 import config
 
 
-def extract_data(method, path, mode=None):
+def extract_data(method, path):
     utils.save_log(f'{extract_data.__module__} :: '
                    f'{extract_data.__name__}')
 
     print('\nExtracting data from text file')
 
-    images_rgb, images_depth, labels_axis, labels_quat = \
-        extract_data_from_file(method, path, mode=mode)
+    images, images_rgb, images_depth, labels_axis, labels_quat = \
+        extract_data_from_file(method, path)
 
     print('Extracting RGB images')
     images_rgb = Processer.extract_images(images_rgb)
-
-    if mode == 'online':
-        return images_rgb, None, None, None
 
     print('Extracting Depth-scene images')
     images_depth = Processer.extract_images(images_depth)
@@ -27,13 +24,14 @@ def extract_data(method, path, mode=None):
     labels_axis, labels_quat = \
         Processer.pose_standardization(labels_axis, labels_quat)
 
-    return images_rgb, \
+    return images, \
+        images_rgb, \
         images_depth, \
         labels_axis, \
         labels_quat
 
 
-def extract_data_from_file(method, path, mode=None):
+def extract_data_from_file(method, path):
     utils.save_log(f'{extract_data_from_file.__module__} :: '
                    f'{extract_data_from_file.__name__}')
 
@@ -59,19 +57,16 @@ def extract_data_from_file(method, path, mode=None):
                                         '.jpg'))
             images_label_axis.append((float(pos_x),
                                       float(pos_y),
-                                      # float(pos_z)
+                                      float(pos_z)
                                       ))
             images_label_quat.append((float(quat_w),
-                                      # float(quat_p),
-                                      # float(quat_q),
+                                      float(quat_p),
+                                      float(quat_q),
                                       float(quat_r)
                                       ))
 
-    if mode is 'online':
-        _, last = utils.sizeof_train_validation_data(len(images_rgb))
-        return images_rgb[:last], None, None, None
-
-    return images_rgb, \
+    return images_name, \
+        images_rgb, \
         images_depth, \
         images_label_axis, \
         images_label_quat

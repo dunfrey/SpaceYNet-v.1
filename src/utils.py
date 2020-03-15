@@ -1,4 +1,5 @@
 import logging
+import math
 
 import config
 
@@ -16,10 +17,24 @@ def save_log(message):
     logging.info(message)
 
 
-def sizeof_train_validation_data(size_array):
+def split_train_validation(size_array):
     size_all = int(size_array / config.BATCH_SIZE)
     size_val = int((size_all * (config.VALID_SPLIT / 100)))
     size_train = size_all - size_val
     end_train = size_train * config.BATCH_SIZE
     size_all = size_all * config.BATCH_SIZE
     return end_train, size_all
+
+
+def quaternion_to_euler(w, x, y, z):
+    t0 = +2.0 * (w * x + y * z)
+    t1 = +1.0 - 2.0 * (x * x + y * y)
+    roll = math.atan2(t0, t1)
+    t2 = +2.0 * (w * y - z * x)
+    t2 = +1.0 if t2 > +1.0 else t2
+    t2 = -1.0 if t2 < -1.0 else t2
+    pitch = math.asin(t2)
+    t3 = +2.0 * (w * z + x * y)
+    t4 = +1.0 - 2.0 * (y * y + z * z)
+    yaw = math.atan2(t3, t4)
+    return [yaw, pitch, roll]
