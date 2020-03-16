@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/italoPontes/fraud_detection.svg?token=xCXQ5y8dztyVs3aHPJLA&branch=master)](https://travis-ci.com/italoPontes/fraud_detection)
-
 # SpaceYNet
 > Simple project description.
 
