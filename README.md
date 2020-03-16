@@ -5,8 +5,8 @@
 
 A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networks.
 
-## Stakeholders
-> Describe the people involved in this project
+
+## Stakeholder
 
 | Role                 | Responsibility         | Full name                | e-mail       |
 | -----                | ----------------       | -----------              | ---------    |
@@ -14,59 +14,32 @@ A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networ
 
 
 ## Usage
-> Describe how to reproduce your model
-
-Usage is standardized across models. There are two main things you need to know, the development workflow and the Makefile commands.
-
-Both are made super simple to work with Git and Docker while versioning experiments and workspace.
-
-All you'll need to have setup is Docker and Git, which you probably already have. If you don't, feel free to ask for help.
-
-Makefile commands can be accessed using `make help`.
-
-
-Make sure that **docker** is installed.
-
-Clone the project from the analytics Models repo.
+Clone the repository:
 ```
-git clone https://github.com/<@github_username>/fraud_detection.git
-cd fraud_detection
+git clone https://github.com/<@github_username>/spaceynet.git
+cd spaceynet
 ```
 
 
-## Final Report (to be filled once the project is done)
+#### Python
 
-### Model Frequency
-
-> Describe the interval frequency and estimated total time to run
-
-### Model updating
-
-> Describe how your model may be updated in the future
-
-### Maintenance
-
-> Describe how your model may be maintained in the future
-
-### Minimum viable product
-
-> Describe a minimum configuration that would be able to create a minimum viable product.
-
-### Early adopters
-
-> Describe any potential paying users for this product if it was available today. Also state a point of contact for each of them.
-
-## Documentation
-
-* [project_specification.md](./docs/project_specification.md): gives a data-science oriented description of the project.
-
-* [model_report.md](./docs/model_report.md): describes the modeling performed.
+The project was written in Python 3, and work with later as well.
+Also, please read up the subsequent libraries that are used: [Tensorflow](https://www.tensorflow.org/), [Matplotlib](https://matplotlib.org/), [OpenCV](https://opencv.org/), [Scikit](https://scikit-learn.org/stable/) and [Numpy](https://numpy.org/).
 
 
-#### Folder structure
->Explain you folder strucure
+### Running
 
-* [docs](./docs): contains documentation of the project
-* [analysis](./analysis/): contains notebooks of data and modeling experimentation.
-* [tests](./tests/): contains files used for unit tests.
-* [fraud_detection](./fraud_detection/): main Python package with source of the model.
+The project does not need user interaction of information in time execution.
+To run the whole workflow of the project, it is possible by the following command:
+
+```
+$ python main.py \
+    train \
+    --path_data_train ../dataset/laser/ \
+    --output_path ../output/
+```
+
+* **train**: SpaceYNet train method.
+* **path_data_train**: training dataset to work on the training step.
+* **output_path**: outcome from the classification model using validation data.
+
