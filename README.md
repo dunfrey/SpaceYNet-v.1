@@ -22,5 +22,21 @@ A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networ
 - [Numpy](https://numpy.org/).
 
 
-#### Paper Link IEEExplore
-https://ieeexplore.ieee.org/document/9145427
+## Documentation
+
+* [IEEExplore](https://ieeexplore.ieee.org/document/9145427): Paper IEEExplore link.
+
+To run train project workflow, it is possible by the following command:
+
+```
+$ python main.py \
+    train \
+    --path_data_train ../dataset/laser/ \
+    --output_path ../output/
+```
+
+#### Folder structure
+>Explain you folder strucure
+* **train**: SpaceYNet train method.
+* **path_data_train**: training dataset to work on the training step.
+* **output_path**: outcome from the classification model using validation data.
