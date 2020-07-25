@@ -1,7 +1,7 @@
 # SpaceYNet
 > 2020 International Conference on Systems, Signals and Image Processing (IWSSIP)
 
-A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networks.
+SpaceYNet: A Novel Approach to Pose and Depth-Scene Regression Simultaneously
 
 
 ## Stakeholder
