@@ -15,7 +15,7 @@ A Approach to Pose and Depth-Scene Regression Simultaneously Using Neural Networ
 #### Project Language
 
 - Python 3
-- [Tensorflow](https://www.tensorflow.org/)-
+- [Tensorflow](https://www.tensorflow.org/)
 - [Matplotlib](https://matplotlib.org/)
 - [OpenCV](https://opencv.org/)
 - [Scikit](https://scikit-learn.org/stable/)
