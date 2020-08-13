@@ -1,5 +1,7 @@
 # SpaceYNet
 > SpaceYNet: A Novel Approach to Pose and Depth-Scene Regression Simultaneously
+* [IEEExplore](https://ieeexplore.ieee.org/document/9145427): Paper IEEExplore link.
+* At *2020 International Conference on Systems, Signals and Image Processing (IWSSIP)*
 
 ## Stakeholder
 
@@ -19,10 +21,7 @@
 - [Numpy](https://numpy.org/).
 
 
-## Documentation
-
-* [IEEExplore](https://ieeexplore.ieee.org/document/9145427): Paper IEEExplore link.
-* At *2020 International Conference on Systems, Signals and Image Processing (IWSSIP)*
+## Running
 
 To run train project workflow, it is possible by the following command:
 
