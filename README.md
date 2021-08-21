@@ -40,6 +40,25 @@ $ python main.py \
 * **path_data_train**: training dataset to work on the training step.
 * **output_path**: outcome from the classification model using validation data.
 
+## Dataset
+
+OuOur model achieves the following performance on the [LaSER](https://www.kaggle.com/dunfrey/laser-dataset) dataset
+
+## Results
+
+SpaceYNet is a multitasking model able to regress the robot's pose and the depth-scene image simultaneously.
+
+We compared SpaceYNet to PoseNet - a state-of-the-art robot pose regression using CNN - to evaluate the pose outcomes.
+
+The outcomes produced by the network and its comparison with PoseNet and ground-truth is displayed below:
+
+> Depth-scene regression:
+<img src="depth_result_laser.png" width="600" height="400"/>
+(At  the  top  are  the  reference values and the forecasts at the bottom)
+
+&nbsp;
+> 6-DoF pose regression:
+<img src="spectrum_axis_xyz_laser.png"/>
 
 ## Citation
 
